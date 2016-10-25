@@ -10,10 +10,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * 编码过滤器
+ * 编码过滤器（开始没有在web中配置）
  * @author Administrator
  *
  */
+
 public class EncodingFilter implements Filter{
 	private String charSet;
 	public void destroy() {

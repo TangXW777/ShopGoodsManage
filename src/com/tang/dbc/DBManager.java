@@ -50,7 +50,7 @@ public class DBManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return conn;
 	}
 	
 	

@@ -1,23 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  	
-  <filter>
-  	<filter-name>encoding</filter-name>
-  	<filter-class>com.tang.filter.EncodingFilter</filter-class>
-  	<init-param>
-  		<param-name>charset</param-name>
-  		<param-value>UTF-8</param-value>
-  	</init-param>
-  </filter>
-  <filter-mapping>
-  	<filter-name>encoding</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+<servlet>
+		<servlet-name>ShowCategoryServlet</servlet-name>
+		<servlet-class>com.tang.category.web.ShowCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowCategoryServlet</servlet-name>
+		<url-pattern>/servlet/ShowCategoryServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowGoodsServlet</servlet-name>
+		<servlet-class>com.tang.goods.web.ShowGoodsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowGoodsServlet</servlet-name>
+		<url-pattern>/servlet/ShowGoodsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CategoryUI</servlet-name>
+		<servlet-class>com.tang.ui.CategoryUI</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryUI</servlet-name>
+		<url-pattern>/servlet/CategoryUI</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GoodsUI</servlet-name>
+		<servlet-class>com.tang.ui.GoodsUI</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GoodsUI</servlet-name>
+		<url-pattern>/servlet/GoodsUI</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddCategoryServlet</servlet-name>
+		<servlet-class>com.tang.category.web.AddCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCategoryServlet</servlet-name>
+		<url-pattern>/servlet/AddCategoryServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddGoodsServlet</servlet-name>
+		<servlet-class>com.tang.goods.web.AddGoodsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddGoodsServlet</servlet-name>
+		<url-pattern>/servlet/AddGoodsServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StartAddGoodsServlet</servlet-name>
+		<servlet-class>com.tang.goods.web.StartAddGoodsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StartAddGoodsServlet</servlet-name>
+		<url-pattern>/servlet/StartAddGoodsServlet</url-pattern>
+	</servlet-mapping>
+
 </web-app>

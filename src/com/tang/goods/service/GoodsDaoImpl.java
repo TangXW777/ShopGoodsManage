@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.spec.PSource;
-
 import com.tang.dbc.DBManager;
-import com.tang.vo.Category;
+import com.tang.tools.DateChange;
 import com.tang.vo.Goods;
 
 /**
@@ -22,7 +20,7 @@ public class GoodsDaoImpl implements GoodsDao{
 	private List<Goods> list = new ArrayList<Goods>();
 	private Connection conn = DBManager.getConnection();
 	private PreparedStatement pstmt = null;
-	private int rs = null;
+	private ResultSet rs = null;
 	
 	// 添加商品
 	public boolean addGoods(Goods good) {
@@ -34,9 +32,12 @@ public class GoodsDaoImpl implements GoodsDao{
 			pstmt.setString(2, good.getGoodsname());
 			pstmt.setDouble(3, good.getGoodsprice());
 			pstmt.setInt(4, good.getCategoryno());
-			pstmt.setDate(5, good.getGoodsdate());
+			// 将java.util.Date 转换为 java.sql.Date
+			pstmt.setDate(5, DateChange.util2Sql(good.getGoodsdate()));
 			pstmt.setInt(6, good.getGoodswarranty());
-			rs = pstmt.executeUpdate();
+			if(pstmt.executeUpdate() > 0){
+				flag = true;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,21 +46,85 @@ public class GoodsDaoImpl implements GoodsDao{
 	}
 
 	// 找到某个商品
-	public Goods findGoods(int goodsId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Goods findGoods(int goodsNo) {
+		Goods goods = null;
+		String sql = "SELECT * FROM goods WHERE goodsno = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, goodsNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				goods = new Goods();
+				goods.setGoodsno(rs.getInt("goodsno"));
+				goods.setGoodsname(rs.getString("goodsname"));
+				goods.setGoodsprice(rs.getDouble("goodsprice"));
+				goods.setCategoryno(rs.getInt("categoryno"));
+				goods.setGoodsdate(DateChange.sql2Util(rs.getDate("goodsdate")));
+				goods.setGoodswarranty(rs.getInt("goodswarranty"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		return goods;
 	}
 	
 	// 获取全部商品
 	public List<Goods> getAllGoods() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Goods> list = new ArrayList<Goods>();
+		String sql = "SELECT * FROM goods";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			Goods goods;
+			while(rs.next()){
+				goods = new Goods();
+				goods.setGoodsno(rs.getInt("goodsno"));
+				goods.setGoodsname(rs.getString("goodsname"));
+				goods.setGoodsprice(rs.getDouble("goodsprice"));
+				goods.setCategoryno(rs.getInt("categoryno"));
+				goods.setGoodsdate(DateChange.sql2Util(rs.getDate("goodsdate")));
+				goods.setGoodswarranty(rs.getInt("goodswarranty"));
+				list.add(goods);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	// 移除某个商品
-	public boolean removeGoods(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeGoods(int goodsNo, List<Goods> list) {
+		boolean flag = false;
+		String sql = "SELECT * FROM goods WHERE goodsno = ?";
+		Goods goods;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, goodsNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				goods = new Goods();
+				goods.setGoodsno(rs.getInt("goodsno"));
+				goods.setGoodsname(rs.getString("goodsname"));
+				goods.setGoodsprice(rs.getDouble("goodsprice"));
+				goods.setCategoryno(rs.getInt("categoryno"));
+				goods.setGoodsdate(DateChange.sql2Util(rs.getDate("goodsdate")));
+				goods.setGoodswarranty(rs.getInt("goodswarranty"));
+				
+				// 如果列表包含这个Goods，则移除
+				if(list.contains(goods)){
+					list.remove(goods);
+					flag = true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 	
 }

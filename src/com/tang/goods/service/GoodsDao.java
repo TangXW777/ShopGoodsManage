@@ -21,5 +21,5 @@ public interface GoodsDao {
 	public boolean addGoods(Goods good);
 	
 	// ÒÆ³ýÄ³¸öÉÌÆ·
-	public boolean removeGoods(int goodsNo);
+	public boolean removeGoods(int goodsNo, List<Goods> list);
 }

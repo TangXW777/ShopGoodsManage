@@ -17,12 +17,11 @@ import com.tang.vo.Category;
  */
 public class CategoryDaoImpl implements CategoryDao{
 	private List<Category> list = new ArrayList<Category>();
-	private Connection conn = null;
+	private Connection conn = DBManager.getConnection();
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	// 取得全部分类
 	public List<Category> getAllCategory() {
-		conn = DBManager.getConnection();
 		String sql = "SELECT * FROM category";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -39,6 +38,23 @@ public class CategoryDaoImpl implements CategoryDao{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	// 添加分类
+	public boolean addCategory(String categoryName){
+		boolean flag = false;
+		String sql = "INSERT INTO category (categoryname) VALUES (?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, categoryName);
+			if(pstmt.executeUpdate() > 0){
+				flag = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

@@ -13,4 +13,7 @@ public interface CategoryDao {
 	
 	// 取得全部分类
 	public List<Category> getAllCategory();
+	
+	// 添加分类
+	public boolean addCategory(String categoryName);
 }
