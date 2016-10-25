@@ -6,8 +6,21 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-
-<servlet>
+	
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>com.tang.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
 		<servlet-name>ShowCategoryServlet</servlet-name>
 		<servlet-class>com.tang.category.web.ShowCategoryServlet</servlet-class>
 	</servlet>
@@ -42,7 +55,7 @@
 		<servlet-name>GoodsUI</servlet-name>
 		<url-pattern>/servlet/GoodsUI</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>AddCategoryServlet</servlet-name>
 		<servlet-class>com.tang.category.web.AddCategoryServlet</servlet-class>
@@ -51,7 +64,7 @@
 		<servlet-name>AddCategoryServlet</servlet-name>
 		<url-pattern>/servlet/AddCategoryServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>AddGoodsServlet</servlet-name>
 		<servlet-class>com.tang.goods.web.AddGoodsServlet</servlet-class>
@@ -60,7 +73,7 @@
 		<servlet-name>AddGoodsServlet</servlet-name>
 		<url-pattern>/servlet/AddGoodsServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>StartAddGoodsServlet</servlet-name>
 		<servlet-class>com.tang.goods.web.StartAddGoodsServlet</servlet-class>

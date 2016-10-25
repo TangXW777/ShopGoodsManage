@@ -18,7 +18,6 @@ public class StartAddGoodsServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		GoodsDao service = new GoodsDaoImpl();
-		req.setCharacterEncoding("UTF-8");
 		int goodsno = Integer.parseInt(req.getParameter("goodsno"));
 		String goodsname = req.getParameter("goodsname");
 		double goodsprice = Double.parseDouble(req.getParameter("goodsprice"));

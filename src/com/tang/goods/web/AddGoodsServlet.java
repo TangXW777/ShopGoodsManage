@@ -16,7 +16,6 @@ public class AddGoodsServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		CategoryDao service = new CategoryDaoImpl();
 		List<Category> list = service.getAllCategory();
 		req.getSession().setAttribute("categoryList", list);

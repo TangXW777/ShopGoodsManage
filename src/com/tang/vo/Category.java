@@ -1,11 +1,13 @@
 package com.tang.vo;
 
+import java.io.Serializable;
+
 /**
  * Category vo¿‡
  * @author Administrator
  *
  */
-public class Category {
+public class Category implements Serializable{
 	private int categoryno;
 	private String categoryname;
 	public int getCategoryno() {

@@ -1,5 +1,6 @@
 package com.tang.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * @author Administrator
  *
  */
-public class Goods {
+public class Goods implements Serializable{
 	private int goodsno;
 	private String goodsname;
 	private double goodsprice;

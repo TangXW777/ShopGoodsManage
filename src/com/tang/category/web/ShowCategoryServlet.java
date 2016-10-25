@@ -22,7 +22,6 @@ public class ShowCategoryServlet extends HttpServlet{
 		
 		CategoryDao service = new CategoryDaoImpl();
 		List<Category> categoryList = service.getAllCategory();
-		req.getSession().removeAttribute("categoryList");
 		// ·ÅÔÚsession·¶Î§
 		req.getSession().setAttribute("categoryList", categoryList);
 		resp.sendRedirect(req.getContextPath() + "/servlet/CategoryUI");
