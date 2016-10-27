@@ -19,7 +19,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<script type="text/javascript" src="js/jquery-2.2.3.js"></script>
+	<script type="text/javascript" src="js/addcategory.js"></script>
   </head>
   
   <body>
@@ -36,12 +37,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		</tr>
    	</c:forEach>
    </table>
-   <h2><a href="javascript::" onclick="">添加分类</a></h2>
+   <h2><a href="javascript::" id="addSort">添加分类</a></h2>
    
-   <div id="add" style="">
-   	<form action="${pageContext.request.contextPath }/servlet/AddCategoryServlet" method="post">
+   <!-- 添加商品区 -->
+   <div id="add" style="display:none">
+   	<form action="${pageContext.request.contextPath }/servlet/AddCategoryServlet" method="post" >
    		分类名：<input type="text" name="sort"/><br/>
-   		<input type="submit" value="提交"/><input type="reset" value="重置"/>
+   		<input type="button" value="提交"/><input type="reset" value="重置"/>
    	</form>
    </div>
    <h2><a href="index.jsp">返回主页</a></h2>

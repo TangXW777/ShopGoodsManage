@@ -43,17 +43,27 @@ public class CategoryDaoImpl implements CategoryDao{
 	// 添加分类
 	public boolean addCategory(String categoryName){
 		boolean flag = false;
-		String sql = "INSERT INTO category (categoryname) VALUES (?)";
+		String sql = "SELECT categoryname FROM category WHERE categoryname = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, categoryName);
-			if(pstmt.executeUpdate() > 0){
-				flag = true;
+			if(pstmt.executeQuery().next()){  // 判断分类是不是重复了
+				System.out.println("重复了");
+				flag = false;     
+			}else{
+				sql = "INSERT INTO category (categoryname) VALUES (?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, categoryName);
+				System.out.println("没重复");
+				if(pstmt.executeUpdate() > 0){
+					flag = true;
+				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+
 		return flag;
 	}
 
