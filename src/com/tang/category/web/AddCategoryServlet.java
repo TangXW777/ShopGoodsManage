@@ -14,18 +14,19 @@ import com.tang.category.service.CategoryDaoImpl;
 
 public class AddCategoryServlet extends HttpServlet{
 	CategoryDao service = new CategoryDaoImpl();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
 		String sort = req.getParameter("sort");
-		System.out.println(sort);
 		if(service.addCategory(sort)){
 			System.out.println("添加分类成功!");
-			resp.sendRedirect(req.getContextPath() + "/servlet/ShowCategoryServlet");
+			out.print("true");
+			// resp.sendRedirect(req.getContextPath() + "/servlet/ShowCategoryServlet");
 		}else{
-			PrintWriter out = resp.getWriter();
-			out.write("false");
+			out.print("false");
 		}
 	}
 	

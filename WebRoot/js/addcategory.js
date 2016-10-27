@@ -4,35 +4,72 @@ $(function(){
 	});
 	
 	
-	
-	
+	$('input[type=button]').click(function(){
+		var error = '';
+		var flag = false;
+		if($('input[type=text]').val() == ''){
+			error = 'not empty';
+		}else{
+			$.ajax({
+				async : false,  // 同步
+				type : 'post',
+				url : '/ShopGoodsManage/servlet/AddCategoryServlet',
+				data : {
+					'sort' : $('input[type=text]').val()
+				},
+				success : function(response, status, xhr){  // 接收返回的数据
+					//alert(response);
+					if(response == 'true'){
+						error = 'success';
+						flag = true;
+					}else{
+						error = 'repetitive sort';
+					}
+				}
+			});
+		}
+		$('span.error').html(error);
+		if(flag){
+			$('form').submit();
+		}
+	});
+/*	
 	$('input[type=text]').blur(function(e){
+		var error = '';
 		if($(this).val() == ''){
+			error = 'not empty';
 			
 		}else{
 			$('input[type=button]').click(function(){
 				var flag = false;
-				alert($('input[type=text]').val());
 				$.ajax({
+					async : false,
 					type : 'post',
 					url : '/ShopGoodsManage/servlet/AddCategoryServlet',
-					date : {
+					data : {
 						'sort' : $('input[type=text]').val()
 					},
 					success : function(response, status, xhr){  // 接收返回的数据
-						if(response != 'false'){
-							alert('true');
+						//alert(response);
+						if(response == 'true'){
+							error = 'success';
 							flag = true;
-						}alert('false')
+						}else{
+							error = 'repetition sort';
+						}
 					}			
 				});
+				//$('span.error').html(error);
+				alert(error+'1');
 				if(flag){
 					$('form').submit();
 				}
 			});
 		}
+		alert(error+'2');
+		$('span.error').html(error);
 	});
-	
+	*/
 	/*
 	
 	var flag = function(){

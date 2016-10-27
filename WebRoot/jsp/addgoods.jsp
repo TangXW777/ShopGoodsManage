@@ -19,25 +19,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="../js/jquery-2-2.3.js"></script>
-	<script type="text/javascript" src="../js/addgoods.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.3.js"></script>
+	<script type="text/javascript" src="js/addgoods.js"></script>
   </head>
   
   <body>
     <h2>添加商品</h2>
-    <form action="${pageContext.request.contextPath }/servlet/StartAddGoodsServlet" method="post">
-    	编号：<input type="text" name="goodsno">(*正整数)<br> 
-    	名称：<input type="text" name="goodsname"><br> 
-    	价格：<input type="text" name="goodsprice">(*小数点两位)<br> 
+    <form action="${pageContext.request.contextPath }/servlet/ShowGoodsServlet" method="post" onsubmit="return checkForm()">
+    	编号：<input type="text" name="goodsno" /><span></span>(*正整数)<br> 
+    	名称：<input type="text" name="goodsname" /><span></span><br> 
+    	价格：<input type="text" name="goodsprice" /><span></span>(*小数点两位)<br> 
     	所属分类： 
     	<select name="categoryno"> 
     		<c:forEach items="${sessionScope.categoryList}" var="category">
     			<option value="${category.categoryno }">${category.categoryname }</option>
     		</c:forEach>
     	</select> <br/>
-    	生产日期：<input type="text" name="goodsdate">(*格式：xxxx-xx-xx)<br> 
-    	保质期(天)：<input type="text" name="goodswarranty">(*单位：天)<br/>
-    	<input type="submit" value="提交"/><input type="reset" value="重置"/>
+    	生产日期：<input type="text" name="goodsdate" /><span></span>(*格式：xxxx-xx-xx)<br> 
+    	保质期(天)：<input type="text" name="goodswarranty" /><span></span>(*单位：天)<br/>
+    	<input type="submit" value="提交"/><input type="reset" value="重置"/><span></span>
     </form>
      <h2><a href="index.jsp">返回主页</a></h2>
   </body>

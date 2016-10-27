@@ -48,13 +48,11 @@ public class CategoryDaoImpl implements CategoryDao{
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, categoryName);
 			if(pstmt.executeQuery().next()){  // 判断分类是不是重复了
-				System.out.println("重复了");
 				flag = false;     
 			}else{
 				sql = "INSERT INTO category (categoryname) VALUES (?)";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, categoryName);
-				System.out.println("没重复");
 				if(pstmt.executeUpdate() > 0){
 					flag = true;
 				}

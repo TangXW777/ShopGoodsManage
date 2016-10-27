@@ -41,8 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
    <!-- 添加商品区 -->
    <div id="add" style="display:none">
-   	<form action="${pageContext.request.contextPath }/servlet/AddCategoryServlet" method="post" >
-   		分类名：<input type="text" name="sort"/><br/>
+   	<form action="${pageContext.request.contextPath }/servlet/ShowCategoryServlet" method="post" >
+   		分类名：<input type="text" name="sort"/><span class="error"></span><br/>
    		<input type="button" value="提交"/><input type="reset" value="重置"/>
    	</form>
    </div>
