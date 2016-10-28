@@ -20,44 +20,31 @@ public class StartAddGoodsServlet extends HttpServlet{
 			throws ServletException, IOException {
 		GoodsDao service = new GoodsDaoImpl();
 		java.util.Date goodsdate = null;
-		PrintWriter out = resp.getWriter();
-		if(req.getParameter("goodsdate") != "" && req.getParameter("goodsno") != "" && req.getParameter("goodsname") != "" 
-			&& req.getParameter("goodsprice") != "" && req.getParameter("categoryno") != "" && req.getParameter("goodswarranty") != ""){
-			try {
-				goodsdate = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("goodsdate"));
-				int goodsno = Integer.parseInt(req.getParameter("goodsno"));
-				String goodsname = req.getParameter("goodsname");
-				double goodsprice = Double.parseDouble(req.getParameter("goodsprice"));
-				int categoryno = Integer.parseInt(req.getParameter("categoryno"));
-				int goodswarranty = Integer.parseInt(req.getParameter("goodswarranty"));
-		
-				
-				Goods good = new Goods();
-				good.setCategoryno(goodsno);
-				good.setGoodsname(goodsname);
-				good.setGoodsprice(goodsprice);
-				good.setCategoryno(categoryno);
-				good.setGoodsdate(goodsdate);
-				good.setGoodswarranty(goodswarranty);
-		
-				if(service.addGoods(good)){
-					System.out.println("Ìí¼ÓÉÌÆ·³É¹¦!");
-					// ÖØÐÂ»ñÈ¡List
-					out.print("success");
-					//resp.sendRedirect(req.getContextPath() + "/servlet/ShowGoodsServlet");
-				}else{
-					out.print("failue");
-				}
-				
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				out.print("errordate");
-				System.out.println("ÈÕÆÚ¸ñÊ½´íÎó");
-			}
-		}else{
-			out.print("empty");
+		try {
+			goodsdate = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("goodsdate"));
+			int goodsno = Integer.parseInt(req.getParameter("goodsno"));
+			String goodsname = req.getParameter("goodsname");
+			double goodsprice = Double.parseDouble(req.getParameter("goodsprice"));
+			int categoryno = Integer.parseInt(req.getParameter("categoryno"));
+			int goodswarranty = Integer.parseInt(req.getParameter("goodswarranty"));
+
+			Goods good = new Goods();
+			good.setCategoryno(goodsno);
+			good.setGoodsname(goodsname);
+			good.setGoodsprice(goodsprice);
+			good.setCategoryno(categoryno);
+			good.setGoodsdate(goodsdate);
+			good.setGoodswarranty(goodswarranty);
+	
+			if(service.addGoods(good)){
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½É¹ï¿½!");
+				// ï¿½ï¿½ï¿½Â»ï¿½È¡List
+				resp.sendRedirect(req.getContextPath() + "/servlet/ShowGoodsServlet");
+			}		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ï¿½ï¿½ï¿½Ú¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½");
 		}
-		
 		
 	}
 	

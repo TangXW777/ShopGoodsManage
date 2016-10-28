@@ -82,5 +82,21 @@
 		<servlet-name>StartAddGoodsServlet</servlet-name>
 		<url-pattern>/servlet/StartAddGoodsServlet</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>CheckGoodsNo</servlet-name>
+		<servlet-class>com.tang.goods.ajax.CheckGoodsNo</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckGoodsNo</servlet-name>
+		<url-pattern>/servlet/CheckGoodsNo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CheckGoodsDate</servlet-name>
+		<servlet-class>com.tang.goods.ajax.CheckGoodsDate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckGoodsDate</servlet-name>
+		<url-pattern>/servlet/CheckGoodsDate</url-pattern>
+	</servlet-mapping>
 </web-app>
